@@ -56,7 +56,7 @@
 
 ## Getting started coding
 
-The generated code created some interfaces for the services under `<base package>/services`, and some anemic implementations under `<base package>/services/impl`. In order to get up and running, we just need to implement our business logic in those implementation classes.
+The generated code created some interfaces for the services under `<base package>/services`, and some anemic implementations under `<base package>/services/impl`. In order to get up and running, we just need to implement our business logic in those implementation classes. This means that we can mostly ignore the complexities of writing a REST API and just get to writing business logic and producing business value . . . QUICKLY.
 
 
 Some other things to note which were generated:
