@@ -51,12 +51,12 @@
      - `context.assertEquals(default, result.getStatusCode());`
        - This is caused because the specification doesn't define the default return code
    - In the `pom.xml`, remove the `<classifier>processor</classifier>` line from the `vertx-web-api-service` dependency
-1. Now we should be able to compile!
+1. Now we should be able to compile and run... Right now, the API is defined and you can make requests, but all requests will return an error of "Not Implemented".
 
 
 ## Getting started coding
 
-The generated code created some interfaces for the services under `<base package>/services`, and some aenemic implementations under `<base package>/services/impl`. In order to get up and running, we just need to implement our business logic in those implementation classes.
+The generated code created some interfaces for the services under `<base package>/services`, and some anemic implementations under `<base package>/services/impl`. In order to get up and running, we just need to implement our business logic in those implementation classes.
 
 
 Some other things to note which were generated:
