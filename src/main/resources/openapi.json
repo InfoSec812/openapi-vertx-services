@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Swagger Petstore",
-    "description": "This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters.",
+    "description": "This is a sample server Petstore server. You can find out more about Swagger\nat [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).\nFor this sample, you can use the api key `special-key` to test the authorization filters.",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
       "email": "apiteam@swagger.io"
@@ -77,6 +77,21 @@
           "required": true
         },
         "responses": {
+          "202": {
+            "description": "Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                }
+              }
+            }
+          },
           "400": {
             "description": "Invalid ID supplied",
             "content": {}
@@ -127,6 +142,21 @@
           "required": true
         },
         "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                }
+              }
+            }
+          },
           "405": {
             "description": "Invalid input",
             "content": {}
@@ -379,6 +409,21 @@
           }
         },
         "responses": {
+          "201": {
+            "description": "Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pet"
+                }
+              }
+            }
+          },
           "405": {
             "description": "Invalid input",
             "content": {}
@@ -424,6 +469,10 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Deleted",
+            "content": {}
+          },
           "400": {
             "description": "Invalid ID supplied",
             "content": {}
@@ -674,6 +723,10 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Deleted",
+            "content": {}
+          },
           "400": {
             "description": "Invalid ID supplied",
             "content": {}
@@ -715,9 +768,20 @@
           "required": true
         },
         "responses": {
-          "default": {
-            "description": "successful operation",
-            "content": {}
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
           }
         }
       }
@@ -757,9 +821,26 @@
           "required": true
         },
         "responses": {
-          "default": {
-            "description": "successful operation",
-            "content": {}
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -799,9 +880,26 @@
           "required": true
         },
         "responses": {
-          "default": {
-            "description": "successful operation",
-            "content": {}
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -890,9 +988,20 @@
           "timeout": 500
         },
         "responses": {
-          "default": {
-            "description": "successful operation",
-            "content": {}
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
           }
         }
       }
@@ -986,6 +1095,21 @@
           "required": true
         },
         "responses": {
+          "202": {
+            "description": "Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
           "400": {
             "description": "Invalid user supplied",
             "content": {}
@@ -1020,6 +1144,10 @@
           }
         ],
         "responses": {
+          "204": {
+            "description": "Deleted",
+            "content": {}
+          },
           "400": {
             "description": "Invalid username supplied",
             "content": {}

@@ -119,8 +119,21 @@ public class StoreServiceTest {
 
   @Test
   public void deleteOrderTest(TestContext context) {
-    Async async = context.async(2);
+    Async async = context.async(3);
     Long orderId;
+
+    // TODO set parameters for 204 response test
+    orderId = null;
+    storeService.deleteOrder(orderId, new OperationRequest(), ar -> {
+      if (ar.succeeded()) {
+        OperationResponse result = ar.result();
+        context.assertEquals(204, result.getStatusCode());
+        //TODO add your asserts
+      } else {
+        context.fail("Operation failed with " + ar.cause().toString());
+      }
+      async.countDown();
+    });
 
     // TODO set parameters for 400 response test
     orderId = null;

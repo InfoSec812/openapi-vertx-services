@@ -42,8 +42,21 @@ public class PetServiceTest {
 
   @Test
   public void updatePetTest(TestContext context) {
-    Async async = context.async(3);
+    Async async = context.async(4);
     Pet body;
+
+    // TODO set parameters for 202 response test
+    body = null;
+    petService.updatePet(body, new OperationRequest(), ar -> {
+      if (ar.succeeded()) {
+        OperationResponse result = ar.result();
+        context.assertEquals(202, result.getStatusCode());
+        //TODO add your asserts
+      } else {
+        context.fail("Operation failed with " + ar.cause().toString());
+      }
+      async.countDown();
+    });
 
     // TODO set parameters for 400 response test
     body = null;
@@ -87,8 +100,21 @@ public class PetServiceTest {
 
   @Test
   public void addPetTest(TestContext context) {
-    Async async = context.async(1);
+    Async async = context.async(2);
     Pet body;
+
+    // TODO set parameters for 201 response test
+    body = null;
+    petService.addPet(body, new OperationRequest(), ar -> {
+      if (ar.succeeded()) {
+        OperationResponse result = ar.result();
+        context.assertEquals(201, result.getStatusCode());
+        //TODO add your asserts
+      } else {
+        context.fail("Operation failed with " + ar.cause().toString());
+      }
+      async.countDown();
+    });
 
     // TODO set parameters for 405 response test
     body = null;
@@ -215,8 +241,21 @@ public class PetServiceTest {
 
   @Test
   public void updatePetWithFormTest(TestContext context) {
-    Async async = context.async(1);
+    Async async = context.async(2);
     Long petId;
+
+    // TODO set parameters for 201 response test
+    petId = null;
+    petService.updatePetWithForm(petId, new OperationRequest(), ar -> {
+      if (ar.succeeded()) {
+        OperationResponse result = ar.result();
+        context.assertEquals(201, result.getStatusCode());
+        //TODO add your asserts
+      } else {
+        context.fail("Operation failed with " + ar.cause().toString());
+      }
+      async.countDown();
+    });
 
     // TODO set parameters for 405 response test
     petId = null;
@@ -234,9 +273,23 @@ public class PetServiceTest {
 
   @Test
   public void deletePetTest(TestContext context) {
-    Async async = context.async(2);
+    Async async = context.async(3);
     Long petId;
     String apiKey;
+
+    // TODO set parameters for 204 response test
+    petId = null;
+    apiKey = null;
+    petService.deletePet(petId, apiKey, new OperationRequest(), ar -> {
+      if (ar.succeeded()) {
+        OperationResponse result = ar.result();
+        context.assertEquals(204, result.getStatusCode());
+        //TODO add your asserts
+      } else {
+        context.fail("Operation failed with " + ar.cause().toString());
+      }
+      async.countDown();
+    });
 
     // TODO set parameters for 400 response test
     petId = null;

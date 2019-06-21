@@ -58,7 +58,7 @@ public class MainVerticle extends AbstractVerticle {
    */
   private Future<Void> startHttpServer() {
     Future<Void> future = Future.future();
-    OpenAPI3RouterFactory.create(this.vertx, getClass().getResource("/petstore.yaml").getFile(), openAPI3RouterFactoryAsyncResult -> {
+    OpenAPI3RouterFactory.create(this.vertx, getClass().getResource("/openapi.yaml").getFile(), openAPI3RouterFactoryAsyncResult -> {
       if (openAPI3RouterFactoryAsyncResult.succeeded()) {
         OpenAPI3RouterFactory routerFactory = openAPI3RouterFactoryAsyncResult.result();
 

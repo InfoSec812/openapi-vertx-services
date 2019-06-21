@@ -45,13 +45,13 @@ public class UserServiceTest {
     Async async = context.async(1);
     User body;
 
-    // TODO set parameters for default response test
+    // TODO set parameters for 201 response test
     body = null;
     userService.createUser(body, new OperationRequest(), ar -> {
       if (ar.succeeded()) {
         OperationResponse result = ar.result();
-        // context.assertEquals(default, result.getStatusCode());
-        // TODO add your asserts
+        context.assertEquals(201, result.getStatusCode());
+        //TODO add your asserts
       } else {
         context.fail("Operation failed with " + ar.cause().toString());
       }
@@ -64,12 +64,12 @@ public class UserServiceTest {
     Async async = context.async(1);
     List<User> body;
 
-    // TODO set parameters for default response test
+    // TODO set parameters for 201 response test
     body = null;
     userService.createUsersWithArrayInput(body, new OperationRequest(), ar -> {
       if (ar.succeeded()) {
         OperationResponse result = ar.result();
-        // context.assertEquals(default, result.getStatusCode());
+        context.assertEquals(201, result.getStatusCode());
         //TODO add your asserts
       } else {
         context.fail("Operation failed with " + ar.cause().toString());
@@ -83,12 +83,12 @@ public class UserServiceTest {
     Async async = context.async(1);
     List<User> body;
 
-    // TODO set parameters for default response test
+    // TODO set parameters for 201 response test
     body = null;
     userService.createUsersWithListInput(body, new OperationRequest(), ar -> {
       if (ar.succeeded()) {
         OperationResponse result = ar.result();
-        // context.assertEquals(default, result.getStatusCode());
+        context.assertEquals(201, result.getStatusCode());
         //TODO add your asserts
       } else {
         context.fail("Operation failed with " + ar.cause().toString());
@@ -136,11 +136,11 @@ public class UserServiceTest {
   public void logoutUserTest(TestContext context) {
     Async async = context.async(1);
 
-    // TODO set parameters for default response test
+    // TODO set parameters for 200 response test
     userService.logoutUser(new OperationRequest(), ar -> {
       if (ar.succeeded()) {
         OperationResponse result = ar.result();
-        // context.assertEquals(default, result.getStatusCode());
+        context.assertEquals(200, result.getStatusCode());
         //TODO add your asserts
       } else {
         context.fail("Operation failed with " + ar.cause().toString());
@@ -196,9 +196,23 @@ public class UserServiceTest {
 
   @Test
   public void updateUserTest(TestContext context) {
-    Async async = context.async(2);
+    Async async = context.async(3);
     String username;
     User body;
+
+    // TODO set parameters for 202 response test
+    username = null;
+    body = null;
+    userService.updateUser(username, body, new OperationRequest(), ar -> {
+      if (ar.succeeded()) {
+        OperationResponse result = ar.result();
+        context.assertEquals(202, result.getStatusCode());
+        //TODO add your asserts
+      } else {
+        context.fail("Operation failed with " + ar.cause().toString());
+      }
+      async.countDown();
+    });
 
     // TODO set parameters for 400 response test
     username = null;
@@ -231,8 +245,21 @@ public class UserServiceTest {
 
   @Test
   public void deleteUserTest(TestContext context) {
-    Async async = context.async(2);
+    Async async = context.async(3);
     String username;
+
+    // TODO set parameters for 204 response test
+    username = null;
+    userService.deleteUser(username, new OperationRequest(), ar -> {
+      if (ar.succeeded()) {
+        OperationResponse result = ar.result();
+        context.assertEquals(204, result.getStatusCode());
+        //TODO add your asserts
+      } else {
+        context.fail("Operation failed with " + ar.cause().toString());
+      }
+      async.countDown();
+    });
 
     // TODO set parameters for 400 response test
     username = null;
