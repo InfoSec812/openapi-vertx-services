@@ -1,9 +1,10 @@
 openapi: 3.0.1
 info:
   title: Swagger Petstore
-  description: 'This is a sample server Petstore server.  You can find out more about     Swagger
-    at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For
-    this sample, you can use the api key `special-key` to test the authorization     filters.'
+  description: |-
+    This is a sample server Petstore server. You can find out more about Swagger
+    at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).
+    For this sample, you can use the api key `special-key` to test the authorization filters.
   termsOfService: http://swagger.io/terms/
   contact:
     email: apiteam@swagger.io
@@ -37,6 +38,10 @@ paths:
       - pet
       summary: Update an existing pet
       operationId: updatePet
+      x-vertx-event-bus:
+        address: petstore.svc.pet
+        class: PetService
+        timeout: 500
       requestBody:
         description: Pet object that needs to be added to the store
         content:
@@ -57,6 +62,15 @@ paths:
         405:
           description: Validation exception
           content: {}
+        202:
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pet'
       security:
       - petstore_auth:
         - write:pets
@@ -66,6 +80,10 @@ paths:
       - pet
       summary: Add a new pet to the store
       operationId: addPet
+      x-vertx-event-bus:
+        address: petstore.svc.pet
+        class: PetService
+        timeout: 500
       requestBody:
         description: Pet object that needs to be added to the store
         content:
@@ -77,6 +95,15 @@ paths:
               $ref: '#/components/schemas/Pet'
         required: true
       responses:
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pet'
         405:
           description: Invalid input
           content: {}
@@ -91,6 +118,10 @@ paths:
       summary: Finds Pets by status
       description: Multiple status values can be provided with comma separated strings
       operationId: findPetsByStatus
+      x-vertx-event-bus:
+        address: petstore.svc.pet
+        class: PetService
+        timeout: 500
       parameters:
       - name: status
         in: query
@@ -136,6 +167,10 @@ paths:
       description: Muliple tags can be provided with comma separated strings. Use         tag1,
         tag2, tag3 for testing.
       operationId: findPetsByTags
+      x-vertx-event-bus:
+        address: petstore.svc.pet
+        class: PetService
+        timeout: 500
       parameters:
       - name: tags
         in: query
@@ -176,6 +211,10 @@ paths:
       summary: Find pet by ID
       description: Returns a single pet
       operationId: getPetById
+      x-vertx-event-bus:
+        address: petstore.svc.pet
+        class: PetService
+        timeout: 500
       parameters:
       - name: petId
         in: path
@@ -207,6 +246,10 @@ paths:
       - pet
       summary: Updates a pet in the store with form data
       operationId: updatePetWithForm
+      x-vertx-event-bus:
+        address: petstore.svc.pet
+        class: PetService
+        timeout: 500
       parameters:
       - name: petId
         in: path
@@ -227,6 +270,15 @@ paths:
                   type: string
                   description: Updated status of the pet
       responses:
+        201:
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Pet'
         405:
           description: Invalid input
           content: {}
@@ -239,6 +291,10 @@ paths:
       - pet
       summary: Deletes a pet
       operationId: deletePet
+      x-vertx-event-bus:
+        address: petstore.svc.pet
+        class: PetService
+        timeout: 500
       parameters:
       - name: api_key
         in: header
@@ -252,6 +308,9 @@ paths:
           type: integer
           format: int64
       responses:
+        204:
+          description: Deleted
+          content: {}
         400:
           description: Invalid ID supplied
           content: {}
@@ -268,6 +327,10 @@ paths:
       - pet
       summary: uploads an image
       operationId: uploadFile
+      x-vertx-event-bus:
+        address: petstore.svc.pet
+        class: PetService
+        timeout: 500
       parameters:
       - name: petId
         in: path
@@ -306,6 +369,10 @@ paths:
       summary: Returns pet inventories by status
       description: Returns a map of status codes to quantities
       operationId: getInventory
+      x-vertx-event-bus:
+        address: petstore.svc.pet
+        class: PetService
+        timeout: 500
       responses:
         200:
           description: successful operation
@@ -324,6 +391,10 @@ paths:
       - store
       summary: Place an order for a pet
       operationId: placeOrder
+      x-vertx-event-bus:
+        address: petstore.svc.store
+        class: StoreService
+        timeout: 500
       requestBody:
         description: order placed for purchasing the pet
         content:
@@ -355,6 +426,10 @@ paths:
       description: For valid response try integer IDs with value >= 1 and <= 10.         Other
         values will generated exceptions
       operationId: getOrderById
+      x-vertx-event-bus:
+        address: petstore.svc.store
+        class: StoreService
+        timeout: 500
       parameters:
       - name: orderId
         in: path
@@ -388,6 +463,10 @@ paths:
       description: For valid response try integer IDs with positive integer value.         Negative
         or non-integer values will generate API errors
       operationId: deleteOrder
+      x-vertx-event-bus:
+        address: petstore.svc.store
+        class: StoreService
+        timeout: 500
       parameters:
       - name: orderId
         in: path
@@ -398,6 +477,9 @@ paths:
           type: integer
           format: int64
       responses:
+        204:
+          description: Deleted
+          content: {}
         400:
           description: Invalid ID supplied
           content: {}
@@ -411,6 +493,10 @@ paths:
       summary: Create user
       description: This can only be done by the logged in user.
       operationId: createUser
+      x-vertx-event-bus:
+        address: petstore.svc.user
+        class: UserService
+        timeout: 500
       requestBody:
         description: Created user object
         content:
@@ -422,15 +508,25 @@ paths:
               $ref: '#/components/schemas/User'
         required: true
       responses:
-        default:
-          description: successful operation
-          content: {}
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
   /user/createWithArray:
     post:
       tags:
       - user
       summary: Creates list of users with given input array
       operationId: createUsersWithArrayInput
+      x-vertx-event-bus:
+        address: petstore.svc.user
+        class: UserService
+        timeout: 500
       requestBody:
         description: List of user object
         content:
@@ -446,15 +542,29 @@ paths:
                 $ref: '#/components/schemas/User'
         required: true
       responses:
-        default:
-          description: successful operation
-          content: {}
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
   /user/createWithList:
     post:
       tags:
       - user
       summary: Creates list of users with given input array
       operationId: createUsersWithListInput
+      x-vertx-event-bus:
+        address: petstore.svc.user
+        class: UserService
+        timeout: 500
       requestBody:
         description: List of user object
         content:
@@ -470,15 +580,29 @@ paths:
                 $ref: '#/components/schemas/User'
         required: true
       responses:
-        default:
-          description: successful operation
-          content: {}
+        201:
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
   /user/login:
     get:
       tags:
       - user
       summary: Logs user into the system
       operationId: loginUser
+      x-vertx-event-bus:
+        address: petstore.svc.user
+        class: UserService
+        timeout: 500
       parameters:
       - name: username
         in: query
@@ -522,16 +646,30 @@ paths:
       - user
       summary: Logs out current logged in user session
       operationId: logoutUser
+      x-vertx-event-bus:
+        address: petstore.svc.user
+        class: UserService
+        timeout: 500
       responses:
-        default:
-          description: successful operation
-          content: {}
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
   /user/{username}:
     get:
       tags:
       - user
       summary: Get user by user name
       operationId: getUserByName
+      x-vertx-event-bus:
+        address: petstore.svc.user
+        class: UserService
+        timeout: 500
       parameters:
       - name: username
         in: path
@@ -561,6 +699,10 @@ paths:
       summary: Updated user
       description: This can only be done by the logged in user.
       operationId: updateUser
+      x-vertx-event-bus:
+        address: petstore.svc.user
+        class: UserService
+        timeout: 500
       parameters:
       - name: username
         in: path
@@ -579,6 +721,15 @@ paths:
               $ref: '#/components/schemas/User'
         required: true
       responses:
+        202:
+          description: Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/User'
         400:
           description: Invalid user supplied
           content: {}
@@ -591,6 +742,10 @@ paths:
       summary: Delete user
       description: This can only be done by the logged in user.
       operationId: deleteUser
+      x-vertx-event-bus:
+        address: petstore.svc.user
+        class: UserService
+        timeout: 500
       parameters:
       - name: username
         in: path
@@ -599,6 +754,9 @@ paths:
         schema:
           type: string
       responses:
+        204:
+          description: Deleted
+          content: {}
         400:
           description: Invalid username supplied
           content: {}
